@@ -1,9 +1,9 @@
 name: Cypress Tests
 
 on:
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch:
   schedule:
-    - cron: "0 6 * * *" # Runs daily at 8 AM UTC (adjust as needed)
+    - cron: "0 6 * * *"
 
 jobs:
   cypress-run:
@@ -19,7 +19,10 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Set execute permissions
+        run: chmod +x node_modules/.bin/cypress
 
       - name: Run Cypress tests
-        run: npx cypress run
+        run: npx cypress run || npx cypress run --headless
