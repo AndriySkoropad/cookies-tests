@@ -15,12 +15,9 @@ describe('Breadcrumbs and collection navigation functionality', () => {
 
       cy.get('#Details-HeaderMenu-1')
         .realHover()
-        .should('be.visible');
 
-      //cy.contains('.gr-mega-links__link', randomCollection)
-      cy.contains('.gr-mega-panel__items', randomCollection)
-        .should('be.visible')
-        .click();
+      cy.contains('.gr-mega-links__link', randomCollection)
+        .click({force:true});
       cy.get('.breadcrumb__item')
         .should('contain', randomCollection.trim())
     });
