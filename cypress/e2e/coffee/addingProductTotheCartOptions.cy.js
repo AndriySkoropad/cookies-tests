@@ -12,9 +12,7 @@ describe('Adding product with options to the cart flow', () => {
     cy.collectionOpenCoffee();
   });
        
-
-
-  it.only('Selecting product options and adding product to the cart', () => {
+  it('Selecting product options and adding product to the cart', () => {
 
     const randomProduct = faker.helpers.arrayElement(productNames); 
     const randomPack = faker.helpers.arrayElement(productPacks);

@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 ///<reference types="cypress" />
 
 describe('Breadcrumbs and collection navigation functionality', () => {
-    let collectionNames = ['Сookies','Gift boxes','Loaf cakes','Coffee','Our merch']
+    let collectionNames = [/*' Сookies '*/' Gift boxes ',' Loaf cakes ',' Coffee ',' Our merch ']
     
     beforeEach(() => {
        cy.login();
@@ -11,17 +11,18 @@ describe('Breadcrumbs and collection navigation functionality', () => {
     });
        
     it('Breadcrumbs change corresponding the collection opened from the home page (except "All products/Gift card")', () => {
-      const randomCollection = faker.helpers.arrayElement(collectionNames); 
+      const randomCollection = faker.helpers.arrayElement(collectionNames).trim(); 
 
       cy.get('#Details-HeaderMenu-1')
         .realHover()
         .should('be.visible');
 
-      cy.contains('.gr-mega-links__link', randomCollection)
+      //cy.contains('.gr-mega-links__link', randomCollection)
+      cy.contains('.gr-mega-panel__items', randomCollection)
         .should('be.visible')
         .click();
-      cy.get('.breadcrumb__items')
-        .should('contain', randomCollection)
+      cy.get('.breadcrumb__item')
+        .should('contain', randomCollection.trim())
     });
 
     it('Breadcrumbs change corresponding the collection opened from the home page ("All products" collection)', () => {
@@ -49,13 +50,16 @@ describe('Breadcrumbs and collection navigation functionality', () => {
     });
 
     it('Breadcrumbs change corresponding the collection opened from the collection page', () => {
-      const randomCollection = faker.helpers.arrayElement(collectionNames); 
+      const randomCollection = faker.helpers.arrayElement(collectionNames).trim(); 
       cy.collectionOpen();
       cy.get('body').realHover();
-      cy.contains('.collections-nav-item', randomCollection)
-        .click();
-      cy.get('.breadcrumb__items')
-        .should('contain', randomCollection)
+      cy.wait(6000)
+      cy.contains('.collections-nav-link', randomCollection)
+        .click()
+ 
+      cy.get('.breadcrumb__item')
+        .should('contain', randomCollection.trim())
+
       cy.get('.gr-collection-banner__title')
         .should('be.visible')
         .invoke('text')

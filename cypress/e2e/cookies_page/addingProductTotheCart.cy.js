@@ -325,7 +325,7 @@ describe('Adding product to the cart flow', () => {
 
     cy.get('.cart__checkout')
       .click()
-    cy.contains('._1x52f9s1', randomProduct)//product title
+    cy.contains('._1tx8jg70', randomProduct)//product title
       .should('be.visible');
     cy.contains('._1qy6ue6b', 'Subtotal') //product price
       .should('be.visible');
