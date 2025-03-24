@@ -107,7 +107,7 @@ describe('Adding product to the cart flow', () => {
 
   });
 
-  it('Product has a correct price in the cart', () => {
+  it.only('Product has a correct price in the cart', () => {
     const randomProduct = faker.helpers.arrayElement(productNames); 
     let productPrice;
     let cartPrice;
