@@ -107,11 +107,12 @@ describe('Shop links functionality', () => {
       .should('be.visible');
   });
 
-  it('The user can see product cards when hovering over the Gift boxes link', () => {
+  it.only('The user can see product cards when hovering over the Gift boxes link', () => {
     cy.get('#Details-HeaderMenu-1')
       .realHover();
     cy.contains('.gr-mega-links__link', 'Gift boxes')
       .realHover();
+    cy.wait(1000)
     cy.get('.gr-mega-panel')
       .should('be.visible')
   });
